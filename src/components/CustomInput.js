@@ -28,9 +28,8 @@ function CustomInput(params) {
         let tmp = "" + ThisButton.current.value;
         console.log(tmp.length);
         if (tmp.length === 0)
-            ThisButton.current.value = 1;
-
-        return ThisButton.current.value;
+            tmp=1;
+        params.ChangeCurr(tmp);
     }
 
     return (
