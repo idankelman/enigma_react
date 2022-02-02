@@ -28,7 +28,8 @@ function App() {
 
   const [isLoading, setLoading] = useState(true);
   const [DataAmount_, UpdateAmount] = useState(0);
-  // const [Currecy, LoadCurrency] = useState(1);
+  const [Currecy, LoadCurrency] = useState(0);
+  const [Transaction_Type,LoadTrans] = useState(0);
   const [ChartData, UpdateChart] = useState([]);
   const dispatch = useDispatch();
   const Token_ = useSelector((state) => state.token.value);
@@ -150,7 +151,9 @@ function App() {
 
   function Transaction() {
     console.log('hi');
-//    send_message(message2);
+    console.log({Transaction_Type});
+    console.log({Currecy});
+    //    send_message(message2);
 
   //   useEffect(() => {
   //   }, []);
@@ -161,10 +164,10 @@ function App() {
   return (
     <div>
       <button className="button1" onClick={Transaction}>Send Buy</button>
-      <CustomInput text={Token_.stamp} Currency="| ₿ |" ref={InputVal} />
+      <CustomInput text={Token_.stamp} Currency="| ₿ |" ref={InputVal} ChangeCurr = {Currency_=>LoadCurrency(Currency_)} />
       <div className="container">
-        <CustomButton text="BUY" amount={Token_.high} />
-        <CustomButton text="SELL" amount={Token_.low} />
+        <CustomButton text="BUY" amount={Token_.high} Trans = {trans=>LoadTrans(trans)} />
+        <CustomButton text="SELL" amount={Token_.low} Trans = {trans=>LoadTrans(trans)} />
       </div>
 
       {/* {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount - (MinAmount + 1), DataAmount - 1)} /> : <LoadCompopnent />} */}
