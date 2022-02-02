@@ -1,4 +1,7 @@
 import React, { useState, useRef } from 'react';
+import Bitcoin_Logo from '../assets/Bitcoin_Logo2.png';
+// import Bitcoin_Logo from '../assets/Bitcoin_Logo.png';
+
 
 function CustomInput(params) {
 
@@ -35,7 +38,10 @@ function CustomInput(params) {
         <div className="inputs">
             <div className="Holder">
                 <input type="text" ref={ThisButton} onChange={SubmitHandler}></input>
-                <div className="Info">{params.Currency}</div>
+                {/* <div className="Info"> */}
+                    {/* {params.Currency} */}
+                    <img src ={Bitcoin_Logo} id ="BitcoinLogo" ></img> 
+                {/* </div> */}
             </div>
             <div className="Info">{params.text}</div>
 
