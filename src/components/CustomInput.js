@@ -6,6 +6,7 @@ function CustomInput(params) {
     const ThisButton = useRef();
 
     function SubmitHandler(event) {
+        
         // event.preventDefault(); // if we have a form that sends a submit http
         // request , we want to cancel it and redirect it
         // ourselves.
@@ -16,6 +17,7 @@ function CustomInput(params) {
         //for the value , but this is the basic structure .
         // console.log(Val);
         // if(Val)
+
         console.log("Changed");
         console.log(ThisButton.current.value);
         //if(String(ThisButton.current.value).length == 0)

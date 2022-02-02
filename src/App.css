@@ -51,6 +51,31 @@ body{
   background-color: whitesmoke;
 }
 
+
+.ChartHolder{
+  width: 100%;
+  height: 600px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  margin-top: 40px;
+  background-color: white; 
+  box-shadow: -10px -10px 12px rgba(70,70,70,0.07),
+              10px 10px 12px rgba(255,255,255,0.8);
+
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+
+  
+}
+
+.ChartHolder #Charter{
+  /* margin-left: 40px; */
+}
+
 .Card{
   width: 350px;
   height: 350px;
@@ -179,7 +204,7 @@ input{
   display: flex;
   font-family: monospace;
   box-shadow: -7px -7px 12px rgba(70,70,70,0.07),
-  7px 7px 12px rgba(255,255,255,0.8);
+                7px 7px 12px rgba(255,255,255,0.8);
   transition: all ease 0.5s;
   text-align: center;
 
@@ -225,9 +250,15 @@ input{
   width: auto;
   margin-top: 15px;
   margin-left: 15px;
-  height: 60px;
+  height: 55px;
+  width: 55px;
   background-color: white;
-  border-radius: 15px;
+
+  
+  box-shadow: -7px -7px 12px rgba(70,70,70,0.07),
+  7px 7px 12px rgba(255,255,255,0.8);
+
+  /* border-radius: 15px; */
   padding-left: 5px;
   padding-right: 5px;
 }
