@@ -143,7 +143,7 @@ function App() {
         <CustomButton text="SELL" amount={Token_.low} />
       </div>
 
-      {!isLoading ? <ChartComponent data={ChartData} /> : <LoadCompopnent />}
+      {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount-(MinAmount+1),DataAmount-1)} /> : <LoadCompopnent />}
 
     </div>
   );
