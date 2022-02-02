@@ -91,16 +91,28 @@ body{
 }
 
 .Log{
-  width: 100%;
+  
+  width: 800px;
   height: 200px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  background-color: whitesmoke;
+
   display: flex;
-  margin-bottom: 20px;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+  align-items: center;
+
+  background-color: whitesmoke;
+  margin-bottom: 15px;
   font-family: monospace;
   font-size: 15px;
+  border-radius: 150px;
+
+}
+
+.Log .Info{
+  height: 150px;
+  width: 80%;
+  font-size: 13px;
 }
 
 .Card{
