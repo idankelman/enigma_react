@@ -27,7 +27,7 @@ function App() {
   //==========================================================================
 
   const [isLoading, setLoading] = useState(true);
-  const [DataAmount_,UpdateAmount] =useState(0);
+  const [DataAmount_, UpdateAmount] = useState(0);
   // const [Currecy, LoadCurrency] = useState(1);
   const [ChartData, UpdateChart] = useState([]);
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ function App() {
   //==========================================================================
 
   //connect to the ws
-  let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiYkwrNE5IVDlHdWx2QWU4clhVQmVKNFJaNG02UHd0bmUxRDBQcW9sdXVqa21VOG9vR1lDTkdSalYzUW5kVUxQRVgyVTdLN2dnZGIzVmU4ZlFhclJnT3NYSlQrSUhLL05kUWlUUVRRR0U1WjVCbkVUekU2SFNOa0NFQ3NDVUhoWjE4RE1yQ1hzVTFXK3hjUXI1VzlIM3FkcGxWQWh2TEpTZGlKNGxMZm41NWN3K3g0SkRSbERWRUloTnRYbWdVNGRBYnY4WWJCaW9nazFrTWltU0FHWmluTFF5TXFVRnpHU09zbURXaGgxZEM3ZVQrUVR6UExqYmRaVndUUFE3REpadHN5Y2lzS1ZGRXQveE8wQWk1Vm01Yy9MeGQ1emRFOFYzMzFHb1ZsT0l1YzFsa08yU0JjTTEycGQ1b3NUY0JHVzJNdTF3cmRqalpCMFJXRDl5cmV6Z0ZEUm9FVWw2U3dNL014MmhsT2wyZGlYdWsrZmxUdVNLUE1Xd1ZOa3dNd0pVUVJ5VU1JU0l6bHl4ZERvaXFVa3FBM1habHpBVC9FVC9TMGVydzhySjBsOVErbmFISit6clByb1hzTWRwTHJoanZMcXVuV1NjS2NxYUxyRHNmSEt1SnJmTktWVWluQVVSdGdDYnNOMGNSWkJRcGx1K1dvMWp4VnFEM3Yrb0pNbkova0Q1RDl4eVdjc1RRbDVGSkNpYWNBPT0iLCJpYXQiOjE2NDM3MTcyMDEsImV4cCI6MTY0MzgwMzYwMX0.0Pf8d8dmA-7zrfggtNGQKZGcygprUNMtrEkFXjzMjzM";
+  let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiYkwrNE5IVDlHdWx2QWU4clhVQmVKNFJaNG02UHd0bmUxRDBQcW9sdXVqa21VOG9vR1lDTkdSalYzUW5kVUxQRVgyVTdLN2dnZGIzVmU4ZlFhclJnT3NYSlQrSUhLL05kUWlUUVRRR0U1WjVCbkVUekU2SFNOa0NFQ3NDVUhoWjE4RE1yQ1hzVTFXK3hjUXI1VzlIM3FkcGxWQWh2TEpTZGlKNGxMZm41NWN3K3g0SkRSbERWRUloTnRYbWdVNGRBYnY4WWJCaW9nazFrTWltU0FHWmluTFF5TXFVRnpHU09zbURXaGgxZEM3ZVQrUVR6UExqYmRaVndUUFE3REpadHN5Y2lzS1ZGRXQveE8wQWk1Vm01Yy9MeGQ1emRFOFYzMzFHb1ZsT0l1YzFsa08yU0JjTTEycGQ1b3NUY0JHVzJNdTF3cmRqalpCMFJXRDl5cmV6Z0ZEUm9FVWw2U3dNL014MmhsT2wyZGlYdWsrZmxUdVNLUE1Xd1ZOa3dNd0pVUVJ5VU1JU0l6bHl4ZERvaXFVa3FBM1habHpBVC9FVC9TMGVydzhySjBsOVErbmFISit6clByb1hzTWRwTHJoanZMcXVuV1NjS2NxYUxyRHNmSEt1SnJmTktWVWluQVVSdGdDYnNOMGNSWkJRcGx1K1dvMWp4VnFEM3Yrb0pNbkova0Q1RDl4eVdjc1RRbDVGSkNpYWNBPT0iLCJpYXQiOjE2NDM4MDU3OTMsImV4cCI6MTY0Mzg5MjE5M30.bRmrCIGTkzQkV_Jf5qkurySgJoFHSB8zlK4weYzU8rU";
   let message = {
     "type": "subscription",
     "id": "bf5d15d0-415f-11ec-b255-ad01e0712738",
@@ -58,6 +58,19 @@ function App() {
       "high": true,
       "low": true,
       "change_daily": true
+    }
+  };
+
+  let message2 = {
+    "type": "execution",
+    "id": "dc7d7e2c-2155-475b-b31f-76dbced95c6b",
+    "data": {
+      "product": "BTC-USD",
+      "side": "BUY",
+      "quantity": 0.22,
+      "type": "MKT",
+      "slippage": 15,
+      "retries": 3
     }
   };
 
@@ -80,6 +93,13 @@ function App() {
     send_message(message);
   }, []);
 
+  
+  //==================================  BUY/SELL   ================================
+
+  // useEffect(() => {
+  //   send_message(message2);
+  // }, []);
+
   //==================================  Recive   ================================
 
 
@@ -94,13 +114,13 @@ function App() {
         let high_ = response.content['BTC-USD'].filter.high;
         let update_ = response.last_update;
         let Chart_ = high_ % 1000;
-        let GBDTime_ = update_.slice(update_.indexOf(' '),update_.indexOf('.')); 
+        let GBDTime_ = update_.slice(update_.indexOf(' '), update_.indexOf('.'));
         let PassData = {
           low: low_,
           high: high_,
           stamp: update_,
           chart: Chart_,
-          Time:GBDTime_
+          Time: GBDTime_
         };
         if (Chart_ > 0) {
           dispatch(create(PassData));
@@ -114,7 +134,7 @@ function App() {
           setLoading(false);
         }
       }
-      catch{
+      catch {
         //TODO : need to add custom loading until the data is 
         //starting to flood in
         console.log('still loading data');
@@ -128,11 +148,19 @@ function App() {
   //==========================================================================
 
 
+  function Transaction() {
+    console.log('hi');
+//    send_message(message2);
+
+  //   useEffect(() => {
+  //   }, []);
+   }
 
 
 
   return (
     <div>
+      <button className="button1" onClick={Transaction}>Send Buy</button>
       <CustomInput text={Token_.stamp} Currency="| ₿ |" ref={InputVal} />
       <div className="container">
         <CustomButton text="BUY" amount={Token_.high} />
@@ -140,8 +168,8 @@ function App() {
       </div>
 
       {/* {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount - (MinAmount + 1), DataAmount - 1)} /> : <LoadCompopnent />} */}
-      {!isLoading ? <ChartComponent max_amount= {DataAmount_} data={ChartData} /> : <LoadCompopnent />}
-      {!isLoading ? <GraphComponent data={ChartData} /> :null}
+      {!isLoading ? <ChartComponent max_amount={DataAmount_} data={ChartData} /> : <LoadCompopnent />}
+      {!isLoading ? <GraphComponent data={ChartData} /> : null}
     </div>
   );
 }
