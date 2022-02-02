@@ -14,6 +14,7 @@ function CustomButton(params) {
     else
       params.Trans(1);
     //   console.log(this);
+      params.Excecuting();
   }
 
   return (
