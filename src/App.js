@@ -1,23 +1,150 @@
-import logo from './logo.svg';
+
+//==========================================================================
+//                          Imports and requires
+//==========================================================================
+
+
 import './App.css';
 
+import CustomButton from './components/CustomButton';
+import CustomInput from './components/CustomInput';
+import LoadCompopnent from './components/LoadComponent';
+import ChartComponent from './components/ChartComponent';
+import ChartLoader from './components/ChartLoader';
+
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { useRef, useEffect } from 'react';
+import { init_ws, send_message } from './services/websocket.js';
+import { create } from './features/Token';
+
 function App() {
+
+
+  //==========================================================================
+  //                          Defninng Reference Variables
+  //==========================================================================
+
+  const [isLoading, setLoading] = useState(true);
+  // const [DataAmount,UpdateAmount] =useState(0);
+  const [Currecy, LoadCurrency] = useState(1);
+  const [ChartData, UpdateChart] = useState([]);
+  const dispatch = useDispatch();
+  const Token_ = useSelector((state) => state.token.value);
+  const InputVal = useRef();
+  // const val = InputVal.current.value;
+
+  let DataAmount = 0;
+  const MinAmount =5;
+
+
+
+
+
+  //==========================================================================
+  //                          Establishing WebSocket Connection
+  //==========================================================================
+
+  //connect to the ws
+  let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiYkwrNE5IVDlHdWx2QWU4clhVQmVKNFJaNG02UHd0bmUxRDBQcW9sdXVqa21VOG9vR1lDTkdSalYzUW5kVUxQRVgyVTdLN2dnZGIzVmU4ZlFhclJnT3NYSlQrSUhLL05kUWlUUVRRR0U1WjVCbkVUekU2SFNOa0NFQ3NDVUhoWjE4RE1yQ1hzVTFXK3hjUXI1VzlIM3FkcGxWQWh2TEpTZGlKNGxMZm41NWN3K3g0SkRSbERWRUloTnRYbWdVNGRBYnY4WWJCaW9nazFrTWltU0FHWmluTFF5TXFVRnpHU09zbURXaGgxZEM3ZVQrUVR6UExqYmRaVndUUFE3REpadHN5Y2lzS1ZGRXQveE8wQWk1Vm01Yy9MeGQ1emRFOFYzMzFHb1ZsT0l1YzFsa08yU0JjTTEycGQ1b3NUY0JHVzJNdTF3cmRqalpCMFJXRDl5cmV6Z0ZEUm9FVWw2U3dNL014MmhsT2wyZGlYdWsrZmxUdVNLUE1Xd1ZOa3dNd0pVUVJ5VU1JU0l6bHl4ZERvaXFVa3FBM1habHpBVC9FVC9TMGVydzhySjBsOVErbmFISit6clByb1hzTWRwTHJoanZMcXVuV1NjS2NxYUxyRHNmSEt1SnJmTktWVWluQVVSdGdDYnNOMGNSWkJRcGx1K1dvMWp4VnFEM3Yrb0pNbkova0Q1RDl4eVdjc1RRbDVGSkNpYWNBPT0iLCJpYXQiOjE2NDM3MTcyMDEsImV4cCI6MTY0MzgwMzYwMX0.0Pf8d8dmA-7zrfggtNGQKZGcygprUNMtrEkFXjzMjzM";
+  let message = {
+    "type": "subscription",
+    "id": "bf5d15d0-415f-11ec-b255-ad01e0712738",
+    "data": {
+      "products": ["BTC-USD"],
+      "quantity": "3.00000000",
+      "level": true,
+      "high": true,
+      "low": true,
+      "change_daily": true
+    }
+  };
+
+
+
+  //==========================================================================
+  //                          WebSockets Functions
+  //==========================================================================
+
+
+  //==================================  Init   ================================
+
+  useEffect(() => {
+    init_ws({ token });
+  }, []);
+
+  //==================================  Message   ================================
+
+  useEffect(() => {
+    send_message(message);
+  }, []);
+
+  //==================================  Recive   ================================
+
+
+
+  useEffect(() => {
+    //const receiveData = (message) => {
+    //console.log(message);
+    //const response = message.data;
+    //console.log(response);
+    //dispatch(create(response));
+    //console.log(message);
+    window.addEventListener("message", function (message) {
+      // console.log('catched');
+      // console.log(message);
+      // let responser = JSON.stringify(message.data);
+      const response = message.data;
+
+      //console.log(response);
+      let low_ = response.content['BTC-USD'].filter.low;
+      let high_ = response.content['BTC-USD'].filter.high;
+      let update_ = response.last_update;
+      let Chart_ = high_ % 1000;
+      // console.log(Chart_);
+      let PassData = {
+        low: low_,
+        high: high_,
+        stamp: update_,
+        chart: Chart_
+      };
+      //console.log(response);
+      //console.log(PassData);
+      if (Chart_ > 0) {
+        dispatch(create(PassData));
+        UpdateChart(oldChart => [...oldChart, PassData]);
+        DataAmount++;
+        // console.log(ChartData.length);
+        console.log(DataAmount);
+
+      }
+      if (DataAmount > MinAmount) {
+        console.log('finished loading');
+        setLoading(false);
+      }
+      //   console.log(low);
+    });
+  }, []);
+
+
+  //==========================================================================
+  //                          Returning the custom componenet app
+  //==========================================================================
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <CustomInput text={Token_.stamp} Currency="Bitcoin" ref={InputVal} />
+      <div className="container">
+        <CustomButton text="BUY" amount={Token_.high} />
+        <CustomButton text="SELL" amount={Token_.low} />
+      </div>
+
+      {!isLoading ? <ChartComponent data={ChartData} /> : <LoadCompopnent />}
+
     </div>
   );
 }
