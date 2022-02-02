@@ -238,11 +238,12 @@ input{
   font-family: monospace;
   justify-content: center;
   align-items: center;
-  font-size:25px;
+  font-size:30px;
   display: flex;
   width: auto;
   margin-top: 25px;
   margin-left: 15px;
+  margin-bottom: 10px;
   height: 55px;
   /* width: 55px; */
   background-color: white;
