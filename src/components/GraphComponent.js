@@ -11,7 +11,7 @@ function GraphComponent(params) {
             <ResponsiveContainer width="90%" height={500} >
                 <AreaChart data={params.data}>
                     <Area dataKey="high" ></Area>
-                    <XAxis dataKey="stamp"></XAxis>
+                    <XAxis dataKey="Time"></XAxis>
                     <YAxis dataKey="high" domain={[params.data[0].high - range, params.data[0].high + range]} ></YAxis>
                     <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                     <Bar dataKey="high" fill="#EE0000" />
