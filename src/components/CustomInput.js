@@ -27,7 +27,7 @@ function CustomInput(params) {
         //    console.log("empty");
         let tmp = "" + ThisButton.current.value;
         console.log(tmp.length);
-        if (tmp.length == 0)
+        if (tmp.length === 0)
             ThisButton.current.value = 1;
 
         return ThisButton.current.value;
