@@ -6,7 +6,7 @@ function ChartLoader(params) {
                 <div id="box"></div>
                 <div id="hill"></div>
             </div>
-        ד</div>
+        </div>
     );
 }
 
