@@ -16,7 +16,7 @@ import {createSlice} from '@reduxjs/toolkit'
 
 export const userSlice = createSlice({
     name : "token",
-    initialState: {value : { low:2.0 , high:2.0 ,stamp:"",chart:2.0}},
+    initialState: {value : { low:2.0 , high:2.0 ,stamp:"",chart:2.0,Time:"----"}},
     reducers:
     {
         //create the token
