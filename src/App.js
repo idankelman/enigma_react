@@ -19,6 +19,7 @@ import { init_ws, send_message } from './services/websocket.js';
 import { create } from './features/Token';
 import GraphComponent from './components/GraphComponent';
 
+
 function App() {
 
 
@@ -31,6 +32,8 @@ function App() {
   const [Currecy, LoadCurrency] = useState(1);
   const [Transaction_Type, LoadTrans] = useState(0);
   const [ChartData, UpdateChart] = useState([]);
+  const [TransLog, UpdateTransLog] = useState("");
+
   const dispatch = useDispatch();
   const Token_ = useSelector((state) => state.token.value);
   const InputVal = useRef();
@@ -111,6 +114,13 @@ function App() {
 
       //Analyzing the response , and adding it to the store
       try {
+        //check if we recived a 
+        let test = JSON.stringify(response);
+        if (test.search("execution") != -1) {
+          UpdateTransLog(test);
+          return;
+        }
+
         let low_ = response.content['BTC-USD'].filter.low;
         let high_ = response.content['BTC-USD'].filter.high;
         let update_ = response.last_update;
@@ -158,11 +168,12 @@ function App() {
   //==========================================================================
 
 
-  function Transaction() {
+
+  function Transaction(type) {
     console.log('hi');
     console.log({ Transaction_Type });
     console.log({ Currecy });
-    let Method = Transaction_Type === 1 ? "SELL" : "BUY";
+    let Method = type === 1 ? "SELL" : "BUY";
 
     message2 = {
       "type": "execution",
@@ -186,6 +197,7 @@ function App() {
 
   return (
     <div>
+      <div className="Log">{TransLog}</div>
       <CustomInput text={Token_.stamp} Currency="| ₿ |" ref={InputVal} ChangeCurr={Currency_ => LoadCurrency(Currency_)} />
       <div className="container">
         <CustomButton text="BUY" amount={Token_.high * Currecy} Trans={trans => LoadTrans(trans)} Excecuting={Transaction} />
@@ -195,6 +207,7 @@ function App() {
       {/* {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount - (MinAmount + 1), DataAmount - 1)} /> : <LoadCompopnent />} */}
       {!isLoading ? <ChartComponent max_amount={DataAmount_} data={ChartData} /> : <LoadCompopnent />}
       {!isLoading ? <GraphComponent data={ChartData} /> : null}
+
     </div>
   );
 }
