@@ -36,7 +36,7 @@ function App() {
   // const val = InputVal.current.value;
 
   let DataAmount = 0;
-  const MinAmount =5;
+  const MinAmount = 5;
 
 
 
@@ -85,45 +85,38 @@ function App() {
 
 
   useEffect(() => {
-    //const receiveData = (message) => {
-    //console.log(message);
-    //const response = message.data;
-    //console.log(response);
-    //dispatch(create(response));
-    //console.log(message);
     window.addEventListener("message", function (message) {
-      // console.log('catched');
-      // console.log(message);
-      // let responser = JSON.stringify(message.data);
       const response = message.data;
 
-      //console.log(response);
-      let low_ = response.content['BTC-USD'].filter.low;
-      let high_ = response.content['BTC-USD'].filter.high;
-      let update_ = response.last_update;
-      let Chart_ = high_ % 1000;
-      // console.log(Chart_);
-      let PassData = {
-        low: low_,
-        high: high_,
-        stamp: update_,
-        chart: Chart_
-      };
-      //console.log(response);
-      //console.log(PassData);
-      if (Chart_ > 0) {
-        dispatch(create(PassData));
-        UpdateChart(oldChart => [...oldChart, PassData]);
-        DataAmount++;
-        // console.log(ChartData.length);
-        console.log(DataAmount);
+      //Analyzing the response , and adding it to the store
+      try {
+        let low_ = response.content['BTC-USD'].filter.low;
+        let high_ = response.content['BTC-USD'].filter.high;
+        let update_ = response.last_update;
+        let Chart_ = high_ % 1000;
+        let GBDTime_ = update_.slice(update_.indexOf(' '),update_.indexOf('.')); 
+        let PassData = {
+          low: low_,
+          high: high_,
+          stamp: update_,
+          chart: Chart_,
+          Time:GBDTime_
+        };
+        if (Chart_ > 0) {
+          dispatch(create(PassData));
+          UpdateChart(oldChart => [...oldChart, PassData]);
+          DataAmount++;
 
+        }
+        if (DataAmount > MinAmount) {
+          setLoading(false);
+        }
       }
-      if (DataAmount > MinAmount) {
-        console.log('finished loading');
-        setLoading(false);
+      catch{
+        //TODO : need to add custom loading until the data is 
+        //starting to flood in
+        console.log('still loading data');
       }
-      //   console.log(low);
     });
   }, []);
 
@@ -144,8 +137,8 @@ function App() {
         <CustomButton text="SELL" amount={Token_.low} />
       </div>
 
-      {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount-(MinAmount+1),DataAmount-1)} /> : <LoadCompopnent />}
-      
+      {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount - (MinAmount + 1), DataAmount - 1)} /> : <LoadCompopnent />}
+
       {!isLoading ? <GraphComponent data={ChartData} /> : <LoadCompopnent />}
     </div>
   );
