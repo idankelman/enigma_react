@@ -12,7 +12,7 @@ function GraphComponent(params) {
                 <AreaChart data={params.data}>
                     <Area dataKey="high" ></Area>
                     <XAxis dataKey="Time"></XAxis>
-                    <YAxis dataKey="high" domain={[params.data[0].high - range, params.data[0].high + range]} ></YAxis>
+                    <YAxis dataKey="high" domain={[parseFloat(params.data[0].high - range),parseFloat( params.data[0].high + range)]} ></YAxis>
                     <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
                     <Bar dataKey="high" fill="#EE0000" />
                     <Bar dataKey="low" fill='#00EE00' />
