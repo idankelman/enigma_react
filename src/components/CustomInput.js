@@ -38,10 +38,10 @@ function CustomInput(params) {
         <div className="inputs">
             <div className="Holder">
                 <input type="text" ref={ThisButton} onChange={SubmitHandler}></input>
-                {/* <div className="Info"> */}
-                    {/* {params.Currency} */}
-                    <img src ={Bitcoin_Logo} id ="BitcoinLogo" ></img> 
-                {/* </div> */}
+                <div className="Info">
+                    {params.Currency}
+                    {/* <img src ={Bitcoin_Logo} id ="BitcoinLogo" ></img>  */}
+                </div>
             </div>
             <div className="Info">{params.text}</div>
 
