@@ -1,5 +1,5 @@
 
-import { BarChart, ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, Bar } from 'recharts';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid, Bar } from 'recharts';
 
 
 function GraphComponent(params) {

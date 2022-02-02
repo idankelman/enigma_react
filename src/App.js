@@ -10,7 +10,7 @@ import CustomButton from './components/CustomButton';
 import CustomInput from './components/CustomInput';
 import LoadCompopnent from './components/LoadComponent';
 import ChartComponent from './components/ChartComponent';
-import ChartLoader from './components/ChartLoader';
+// import ChartLoader from './components/ChartLoader';
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
@@ -28,7 +28,7 @@ function App() {
 
   const [isLoading, setLoading] = useState(true);
   const [DataAmount_,UpdateAmount] =useState(0);
-  const [Currecy, LoadCurrency] = useState(1);
+  // const [Currecy, LoadCurrency] = useState(1);
   const [ChartData, UpdateChart] = useState([]);
   const dispatch = useDispatch();
   const Token_ = useSelector((state) => state.token.value);

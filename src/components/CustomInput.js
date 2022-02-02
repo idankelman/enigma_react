@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import Bitcoin_Logo from '../assets/Bitcoin_Logo2.png';
+import React, { useRef } from 'react';
+// import Bitcoin_Logo from '../assets/Bitcoin_Logo2.png';
 // import Bitcoin_Logo from '../assets/Bitcoin_Logo.png';
 
 
