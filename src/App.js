@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useRef, useEffect } from 'react';
 import { init_ws, send_message } from './services/websocket.js';
 import { create } from './features/Token';
+import GraphComponent from './components/GraphComponent';
 
 function App() {
 
@@ -144,7 +145,8 @@ function App() {
       </div>
 
       {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount-(MinAmount+1),DataAmount-1)} /> : <LoadCompopnent />}
-
+      
+      {!isLoading ? <GraphComponent data={ChartData} /> : <LoadCompopnent />}
     </div>
   );
 }
