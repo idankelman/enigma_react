@@ -196,8 +196,9 @@ function App() {
   }
 
   return (
-    <div>
+    <div className = "mainContent">
       <div className="Log">{TransLog}</div>
+
       <CustomInput text={Token_.stamp} Currency="| ₿ |" ref={InputVal} ChangeCurr={Currency_ => LoadCurrency(Currency_)} />
       <div className="container">
         <CustomButton text="BUY" amount={Token_.high * Currecy} Trans={trans => LoadTrans(trans)} Excecuting={Transaction} />
