@@ -40,6 +40,15 @@ body{
 }
 
 
+/* 
+.mainContent{
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+} */
 
 .Holder{
   width: 600px;
@@ -81,9 +90,18 @@ body{
   height: 50px;
 }
 
-/* .ChartHolder #Charter{
-  margin-left: 40px;
-} */
+.Log{
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  display: flex;
+  margin-bottom: 20px;
+  font-family: monospace;
+  font-size: 15px;
+}
 
 .Card{
   width: 350px;

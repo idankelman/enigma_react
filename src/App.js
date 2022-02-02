@@ -19,6 +19,7 @@ import { init_ws, send_message } from './services/websocket.js';
 import { create } from './features/Token';
 import GraphComponent from './components/GraphComponent';
 
+
 function App() {
 
 
@@ -28,9 +29,11 @@ function App() {
 
   const [isLoading, setLoading] = useState(true);
   const [DataAmount_, UpdateAmount] = useState(0);
-  const [Currecy, LoadCurrency] = useState(0);
-  const [Transaction_Type,LoadTrans] = useState(0);
+  const [Currecy, LoadCurrency] = useState(1);
+  const [Transaction_Type, LoadTrans] = useState(0);
   const [ChartData, UpdateChart] = useState([]);
+  const [TransLog, UpdateTransLog] = useState("");
+
   const dispatch = useDispatch();
   const Token_ = useSelector((state) => state.token.value);
   const InputVal = useRef();
@@ -94,7 +97,7 @@ function App() {
     send_message(message);
   }, []);
 
-  
+
   //==================================  BUY/SELL   ================================
 
   // useEffect(() => {
@@ -111,6 +114,13 @@ function App() {
 
       //Analyzing the response , and adding it to the store
       try {
+        //check if we recived a 
+        let test = JSON.stringify(response);
+        if (test.search("execution") != -1) {
+          UpdateTransLog(test);
+          return;
+        }
+
         let low_ = response.content['BTC-USD'].filter.low;
         let high_ = response.content['BTC-USD'].filter.high;
         let update_ = response.last_update;
@@ -134,6 +144,15 @@ function App() {
         if (DataAmount > MinAmount) {
           setLoading(false);
         }
+
+
+        //adding restriction : too much data
+        //makes the web application slow
+        if (DataAmount > 100) {
+          setLoading(true);
+          UpdateChart([]);
+          DataAmount = 0;
+        }
       }
       catch {
         //TODO : need to add custom loading until the data is 
@@ -149,30 +168,47 @@ function App() {
   //==========================================================================
 
 
-  function Transaction() {
+
+  function Transaction(type) {
     console.log('hi');
-    console.log({Transaction_Type});
-    console.log({Currecy});
-    //    send_message(message2);
+    console.log({ Transaction_Type });
+    console.log({ Currecy });
+    let Method = type === 1 ? "SELL" : "BUY";
 
-  //   useEffect(() => {
-  //   }, []);
-   }
+    message2 = {
+      "type": "execution",
+      "id": "dc7d7e2c-2155-475b-b31f-76dbced95c6b",
+      "data": {
+        "product": "BTC-USD",
+        "side": Method,
+        "quantity": Currecy,
+        "type": "MKT",
+        "slippage": 15,
+        "retries": 3
+      }
+    };
 
+    console.log(message2);
+    send_message(message2);
 
+    //   useEffect(() => {
+    //   }, []);
+  }
 
   return (
-    <div>
-      <button className="button1" onClick={Transaction}>Send Buy</button>
-      <CustomInput text={Token_.stamp} Currency="| ₿ |" ref={InputVal} ChangeCurr = {Currency_=>LoadCurrency(Currency_)} />
+    <div className = "mainContent">
+      <div className="Log">{TransLog}</div>
+
+      <CustomInput text={Token_.stamp} Currency="| ₿ |" ref={InputVal} ChangeCurr={Currency_ => LoadCurrency(Currency_)} />
       <div className="container">
-        <CustomButton text="BUY" amount={Token_.high} Trans = {trans=>LoadTrans(trans)} />
-        <CustomButton text="SELL" amount={Token_.low} Trans = {trans=>LoadTrans(trans)} />
+        <CustomButton text="BUY" amount={Token_.high * Currecy} Trans={trans => LoadTrans(trans)} Excecuting={Transaction} />
+        <CustomButton text="SELL" amount={Token_.low * Currecy} Trans={trans => LoadTrans(trans)} Excecuting={Transaction} />
       </div>
 
       {/* {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount - (MinAmount + 1), DataAmount - 1)} /> : <LoadCompopnent />} */}
       {!isLoading ? <ChartComponent max_amount={DataAmount_} data={ChartData} /> : <LoadCompopnent />}
       {!isLoading ? <GraphComponent data={ChartData} /> : null}
+
     </div>
   );
 }

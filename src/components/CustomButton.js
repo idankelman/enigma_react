@@ -9,11 +9,14 @@ function CustomButton(params) {
   function BuyClick() {
     // console.log(ThisButton.current);
     console.log(ThisButton.current);
+    let type = 0;
     if (params.text === "BUY")
-      params.Trans(2);
+      type=2;
     else
-      params.Trans(1);
+      type=1;
     //   console.log(this);
+      params.Trans(type);
+      params.Excecuting(type);
   }
 
   return (

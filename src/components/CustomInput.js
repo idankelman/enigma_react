@@ -37,7 +37,7 @@ function CustomInput(params) {
         <div className="inputs">
             <div className = "Info">Please Enter Required Amount</div>
             <div className="Holder">
-                <input type="text" ref={ThisButton} onChange={SubmitHandler}></input>
+                <input type="number" ref={ThisButton} onChange={SubmitHandler}></input>
                 <div className="Info">
                     {params.Currency}
                     {/* <img src ={Bitcoin_Logo} id ="BitcoinLogo" ></img>  */}
