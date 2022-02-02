@@ -27,7 +27,7 @@ function App() {
   //==========================================================================
 
   const [isLoading, setLoading] = useState(true);
-  // const [DataAmount,UpdateAmount] =useState(0);
+  const [DataAmount_,UpdateAmount] =useState(0);
   const [Currecy, LoadCurrency] = useState(1);
   const [ChartData, UpdateChart] = useState([]);
   const dispatch = useDispatch();
@@ -106,7 +106,9 @@ function App() {
           dispatch(create(PassData));
           UpdateChart(oldChart => [...oldChart, PassData]);
           DataAmount++;
+          UpdateAmount(DataAmount);
 
+          // console.log(DataAmount);
         }
         if (DataAmount > MinAmount) {
           setLoading(false);
@@ -131,13 +133,14 @@ function App() {
 
   return (
     <div>
-      <CustomInput text={Token_.stamp} Currency="Bitcoin" ref={InputVal} />
+      <CustomInput text={Token_.stamp} Currency="| ₿ |" ref={InputVal} />
       <div className="container">
         <CustomButton text="BUY" amount={Token_.high} />
         <CustomButton text="SELL" amount={Token_.low} />
       </div>
 
-      {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount - (MinAmount + 1), DataAmount - 1)} /> : <LoadCompopnent />}
+      {/* {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount - (MinAmount + 1), DataAmount - 1)} /> : <LoadCompopnent />} */}
+      {!isLoading ? <ChartComponent max_amount= {DataAmount_} data={ChartData} /> : <LoadCompopnent />}
 
       {!isLoading ? <GraphComponent data={ChartData} /> : <LoadCompopnent />}
     </div>
