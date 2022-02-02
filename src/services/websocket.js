@@ -27,7 +27,7 @@ export const init_ws = ({ token }) => {
         // console.log(JSON.parse(message.data).content['BTC-USD'].filter.low);
         // console.log("Recived Message\n"+ JSON.stringify(message));
         const response = JSON.parse(message.data);
-        console.log(response);
+        //console.log(response);
         postMessage(response);
         
       }
