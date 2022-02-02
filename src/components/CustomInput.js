@@ -36,6 +36,7 @@ function CustomInput(params) {
     return (
 
         <div className="inputs">
+            <div className = "Info">Please Enter Required Amount</div>
             <div className="Holder">
                 <input type="text" ref={ThisButton} onChange={SubmitHandler}></input>
                 <div className="Info">
