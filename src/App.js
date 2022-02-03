@@ -48,6 +48,8 @@ function App() {
 
   let DataAmount = 0;
   const MinAmount = 5;
+  
+  const ToastMessage="Incomming data about the latest transactions will be displayed here";
 
 
 
@@ -121,13 +123,24 @@ function App() {
 
       //Analyzing the response , and adding it to the store
       try {
-        //check if we recived a 
+        
+      //==================================  Toast   ================================
+
+
         let test = JSON.stringify(response);
         if (test.search("execution") != -1) {
           UpdateTransLog(test);
-          toast('recived message from api');
+          toast.info(test, {
+            className :"info-toast",
+            position: toast.POSITION.TOP_CENTER,
+            closeButton: false,
+            autoClose: 4000
+          });
           return;
         }
+
+  //==================================  add to the data   ================================
+
 
         let low_ = response.content['BTC-USD'].filter.low;
         let high_ = response.content['BTC-USD'].filter.high;
@@ -163,8 +176,6 @@ function App() {
         }
       }
       catch {
-        //TODO : need to add custom loading until the data is 
-        //starting to flood in
         console.log('still loading data');
       }
     });
@@ -194,17 +205,19 @@ function App() {
       }
     };
 
-    console.log(message2);
+    // console.log(message2);
     send_message(message2);
 
-    //   useEffect(() => {
-    //   }, []);
   }
+  //==========================================================================
+  //                          Return Component
+  //==========================================================================
+
 
   return (
     <div>
       <div className="Log">
-        <div className="Info">{TransLog}ffffff</div>
+        <div className="Info">{TransLog?TransLog:ToastMessage}</div>
       </div>
       <CustomInput text={Token_.stamp} Currency="| ₿ |" ref={InputVal} ChangeCurr={Currency_ => LoadCurrency(Currency_)} />
       <div className="container">
