@@ -1,6 +1,6 @@
-#About The Web Applpication : 
+# About The Web Applpication : 
 
-##Created by Idan Kelman 3/2//2022 
+## Created by Idan Kelman on  3/2//2022 
 
 ![WhatsApp Image 2022-02-03 at 03 56 13](https://user-images.githubusercontent.com/80175752/152268767-54a64282-fbc8-4da5-abda-d5b8e33b9845.jpeg)
 
