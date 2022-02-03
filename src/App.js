@@ -17,9 +17,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useRef, useEffect } from 'react';
 import { init_ws, send_message } from './services/websocket.js';
 import { create } from './features/Token';
+
 import GraphComponent from './components/GraphComponent';
+// import { useToasts } from 'react-toast-notifications';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
+
+toast.configure()
 function App() {
 
 
@@ -118,6 +125,7 @@ function App() {
         let test = JSON.stringify(response);
         if (test.search("execution") != -1) {
           UpdateTransLog(test);
+          toast('recived message from api');
           return;
         }
 
@@ -166,8 +174,6 @@ function App() {
   //==========================================================================
   //                          Returning the custom componenet app
   //==========================================================================
-
-
 
   function Transaction(type) {
     console.log('hi');
