@@ -226,8 +226,8 @@ function App() {
       </div>
 
       {/* {!isLoading ? <ChartComponent data={ChartData.slice(DataAmount - (MinAmount + 1), DataAmount - 1)} /> : <LoadCompopnent />} */}
-      {!isLoading ? <ChartComponent max_amount={DataAmount_} data={ChartData} /> : <LoadCompopnent />}
       {!isLoading ? <GraphComponent data={ChartData} /> : null}
+      {!isLoading ? <ChartComponent max_amount={DataAmount_} data={ChartData} /> : <LoadCompopnent />}
 
     </div>
   );
