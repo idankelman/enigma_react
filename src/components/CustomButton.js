@@ -1,6 +1,11 @@
 
 import React, { useRef } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+// toast-configuration method,
+// it is compulsory method.
+toast.configure()
 
 function CustomButton(params) {
 
@@ -11,12 +16,14 @@ function CustomButton(params) {
     console.log(ThisButton.current);
     let type = 0;
     if (params.text === "BUY")
-      type=2;
+      type = 2;
     else
-      type=1;
+      type = 1;
     //   console.log(this);
-      params.Trans(type);
-      params.Excecuting(type);
+    params.Trans(type);
+    params.Excecuting(type);
+    toast('sent transaction '+params.text)
+
   }
 
   return (
