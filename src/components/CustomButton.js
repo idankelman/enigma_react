@@ -22,8 +22,11 @@ function CustomButton(params) {
     //   console.log(this);
     params.Trans(type);
     params.Excecuting(type);
-    toast('sent transaction '+params.text)
-
+    // toast.info('sent transaction ' + params.text, {
+    //   position: toast.POSITION.BOTTOM_CENTER,
+    //   closeButton: false,
+    //   autoClose: 2000
+    // });
   }
 
   return (
