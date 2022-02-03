@@ -1,3 +1,26 @@
+# About The Web Applpication : 
+
+## Created by Idan Kelman on  3/2//2022 
+
+### on this app you will be able to see in realtime the changes on the BitCoin digital currency [in USD] 
+
+![WhatsApp Image 2022-02-03 at 03 56 13](https://user-images.githubusercontent.com/80175752/152268767-54a64282-fbc8-4da5-abda-d5b8e33b9845.jpeg)
+
+### you are able to perform BUY/SELL transactions using the buttons and the input field
+
+![WhatsApp Image 2022-02-03 at 03 56 51](https://user-images.githubusercontent.com/80175752/152268771-4790b06a-7532-4a46-a438-509b1eba8c93.jpeg)
+
+### you are constantly being fed with the changes to the currency , and you can see the last 100 transactions in a graph/chart manner
+
+![WhatsApp Image 2022-02-03 at 03 57 17](https://user-images.githubusercontent.com/80175752/152268782-aac2ba79-b4d5-4c3e-bd4d-f5ff369c529d.jpeg)
+
+### you can change what you want to currently see using the buttons above each chart
+
+![WhatsApp Image 2022-02-03 at 03 57 39](https://user-images.githubusercontent.com/80175752/152268787-34ec8ea7-5476-4efd-b1fd-a704c4b48774.jpeg)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
